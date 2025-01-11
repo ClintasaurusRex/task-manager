@@ -15,12 +15,14 @@ const Home = () => {
   };
 
   const handleAddTask = async () => {
+    if (!newTask.trim()) return;
     await addTask({ title: newTask });
     setNewTask("");
     loadTasks();
   };
 
   const handleDeleteTask = async (id) => {
+    if (!id) return;
     await deleteTask(id);
     loadTasks();
   };
@@ -37,9 +39,9 @@ const Home = () => {
       <button onClick={handleAddTask}>Add Task</button>
       <ul>
         {tasks.map((task) => (
-          <li key={task._id}>
+          <li key={task.id}>
             {task.title}
-            <button onClick={() => handleDeleteTask(task._id)}>Delete</button>
+            {task.id && <button onClick={() => handleDeleteTask(task.id)}>Delete</button>}
           </li>
         ))}
       </ul>
