@@ -1,27 +1,25 @@
+require("dotenv").config();
 const express = require("express");
-const mongoose = require("mongoose");
 const cors = require("cors");
+const taskRoutes = require("./routes/taskRoutes");
+const pool = require("./config/database");
 
 const app = express();
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
-// Middleware
 app.use(cors());
 app.use(express.json());
+app.use("/tasks", taskRoutes);
 
-// Connect to MongoDB
-mongoose
-  .connect("mongodb://localhost:27017/taskmanager", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => console.log("MongoDB connected"))
-  .catch((err) => console.error(err));
-
-// Routes
-app.use("/tasks", require("./routes/taskRoutes"));
+// Test database connection with error details
+pool.query("SELECT NOW()", (err, res) => {
+  if (err) {
+    console.log("Database connection failed:", err.message);
+  } else {
+    console.log("Database connected successfully YEEHAW");
+  }
+});
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
-// hello
