@@ -61,6 +61,28 @@ button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
+.title {
+  text-align: center;
+  animation: glow 2s ease-in-out infinite alternate;
+  transition: transform 0.3s ease;
+}
+
+.title:hover {
+  transform: scale(1.05);
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 0 0 10px #646cff,
+                 0 0 20px #646cff,
+                 0 0 30px #646cff;
+  }
+  to {
+    text-shadow: 0 0 20px #535bf2,
+                 0 0 30px #535bf2,
+                 0 0 40px #535bf2;
+  }
+}
 
 @media (prefers-color-scheme: light) {
   :root {

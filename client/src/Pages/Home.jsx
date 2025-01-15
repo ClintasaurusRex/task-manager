@@ -30,7 +30,7 @@ const Home = () => {
 
   return (
     <div>
-      <h1>Task Manager</h1>
+      <h1 className="title">Task Manager</h1>
       <div className="input-container">
         <div className="input-fields">
           <input
