@@ -7,8 +7,8 @@ const TaskList = ({ tasks, onDelete }) => {
   const completedTasks = tasks.filter(task => task.completed);
 
   return (
-    <div className="task-container">
-      <div className="tasks-section">
+    <div className="main-container">
+      <div className="pending-container">
         <h2 className="section-title">Pending Tasks</h2>
         <div className="task-grid">
           {pendingTasks.map(task => (
@@ -17,7 +17,7 @@ const TaskList = ({ tasks, onDelete }) => {
         </div>
       </div>
       
-      <div className="tasks-section">
+      <div className="completed-container">
         <h2 className="section-title">Completed Tasks</h2>
         <div className="task-grid">
           {completedTasks.map(task => (
