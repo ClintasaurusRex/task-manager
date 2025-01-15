@@ -129,7 +129,6 @@
   margin-bottom: 20px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
   align-items: center;
   gap: 15px;
 }
@@ -156,7 +155,12 @@
   background: #3498db;
   color: white;
   width: 100%;
-  max-width: 300px;
+  /* max-width: 300px; */
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  margin-left: 21px;
+  width: 28%;
 }
 
 .input-container button:hover {

@@ -56,7 +56,7 @@ const Home = () => {
             }}
           />
         </div>
-        <button onClick={handleAddTask}>Add Task</button>
+        <button className="add-task-button" onClick={handleAddTask}>Add Task</button>
       </div>
       <TaskList tasks={tasks} onDelete={handleDeleteTask} />
     </div>
