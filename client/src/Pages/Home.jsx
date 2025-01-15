@@ -28,6 +28,12 @@ const Home = () => {
     setTasks(tasks.filter(task => task.id !== id));
   };
 
+  const handleToggleComplete = (id) => {
+    setTasks(tasks.map(task => 
+      task.id === id ? { ...task, completed: !task.completed } : task
+    ));
+  };
+
   return (
     <div>
       <h1 className="title">Task Manager</h1>
@@ -58,7 +64,11 @@ const Home = () => {
         </div>
         <button className="add-task-button" onClick={handleAddTask}>Add Task</button>
       </div>
-      <TaskList tasks={tasks} onDelete={handleDeleteTask} />
+      <TaskList 
+        tasks={tasks} 
+        onDelete={handleDeleteTask} 
+        onToggleComplete={handleToggleComplete} 
+      />
     </div>
   );
 };
