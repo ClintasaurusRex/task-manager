@@ -1,50 +1,49 @@
-import React, { useEffect, useState } from "react";
-import { getTasks, addTask, deleteTask } from "../Services/taskService";
+import React, { useState } from "react";
+import TaskCard from "../components/TaskCard";
+import mockTasks from "../data/mockTasks";
+import TaskList from "../components/TaskList";
 
 const Home = () => {
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState(mockTasks);
   const [newTask, setNewTask] = useState("");
 
-  useEffect(() => {
-    loadTasks();
-  }, []);
-
-  const loadTasks = async () => {
-    const response = await getTasks();
-    setTasks(response.data);
-  };
-
-  const handleAddTask = async () => {
+  const handleAddTask = () => {
     if (!newTask.trim()) return;
-    await addTask({ title: newTask });
+    
+    const newTaskObj = {
+      id: tasks.length + 1,
+      title: newTask,
+      description: "No description provided",
+      completed: false,
+      created_at: new Date().toISOString()
+    };
+
+    setTasks([newTaskObj, ...tasks]);
     setNewTask("");
-    loadTasks();
   };
 
-  const handleDeleteTask = async (id) => {
-    if (!id) return;
-    await deleteTask(id);
-    loadTasks();
+  const handleDeleteTask = (id) => {
+    setTasks(tasks.filter(task => task.id !== id));
   };
 
   return (
     <div>
       <h1>Task Manager</h1>
-      <input
-        type="text"
-        value={newTask}
-        onChange={(e) => setNewTask(e.target.value)}
-        placeholder="New Task"
-      />
-      <button onClick={handleAddTask}>Add Task</button>
-      <ul>
-        {tasks.map((task) => (
-          <li key={task.id}>
-            {task.title}
-            {task.id && <button onClick={() => handleDeleteTask(task.id)}>Delete</button>}
-          </li>
-        ))}
-      </ul>
+      <div className="input-container">
+        <input
+          type="text"
+          value={newTask}
+          onChange={(e) => setNewTask(e.target.value)}
+          placeholder="New Task"
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              handleAddTask();
+            }
+          }}  
+        />
+        <button onClick={handleAddTask}>Add Task</button>
+      </div>
+      <TaskList tasks={tasks} onDelete={handleDeleteTask} />
     </div>
   );
 };
