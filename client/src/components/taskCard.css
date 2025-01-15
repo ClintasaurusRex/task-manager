@@ -1,11 +1,17 @@
-.main-container {
-  padding: 20px;
+.home-container {
+  width: 100%;
   max-width: 1200px;
-  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.main-container {
+  width: 100%;
+  padding: 20px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 40px;
-  text-align: center;
 }
 
 .pending-container,
@@ -48,6 +54,10 @@
   padding: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s;
+  min-width: 250px;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: center;
 }
 
 .task-card:hover {
@@ -103,24 +113,95 @@
 .input-container {
   margin-bottom: 20px;
   display: flex;
+  flex-direction: column;
   gap: 10px;
-  justify-content: center;
+  align-items: center;
+  gap: 15px;
 }
 
-.input-container input {
+.input-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  max-width: 300px;
+}
+
+.input-fields input {
   padding: 10px;
   border-radius: 4px;
   border: 1px solid #444;
   background: #333;
   color: white;
-  width: 300px;
+  width: 100%;
 }
 
 .input-container button {
   background: #3498db;
   color: white;
+  width: 100%;
+  max-width: 300px;
 }
 
 .input-container button:hover {
   background: #2980b9;
+}
+
+/* Responsive grid adjustments */
+@media screen and (max-width: 768px) {
+  .main-container {
+    grid-template-columns: 1fr;  /* Stack containers vertically on smaller screens */
+    gap: 20px;
+    padding: 10px;
+  }
+
+  .task-grid {
+    grid-template-columns: 1fr;  /* Single column for tasks */
+  }
+
+  .input-fields {
+    max-width: 100%;  /* Full width on mobile */
+    padding: 0 10px;
+  }
+
+  .input-container button {
+    max-width: 100%;
+  }
+}
+
+/* Tablet adjustments */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  .main-container {
+    gap: 20px;
+  }
+
+  .task-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+}
+
+/* Larger screens */
+@media screen and (min-width: 1400px) {
+  .main-container {
+    max-width: 1400px;
+  }
+
+  .task-grid {
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  }
+}
+
+/* Adjust text sizes for readability */
+@media screen and (max-width: 480px) {
+  .section-title {
+    font-size: 1.2em;
+  }
+
+  .task-card h3 {
+    font-size: 1.1em;
+  }
+
+  .task-card p {
+    font-size: 0.9em;
+  }
 }
